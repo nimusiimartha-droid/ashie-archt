@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Axiom — Architecture, Engineering & Design</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* HERO — full viewport, image only */
+.hero{
+  margin-top:54px;
+  height:calc(100vh - 54px);
+  position:relative;overflow:hidden;
+  background:#0b0e12;
+}
+.hero svg{position:absolute;inset:0;width:100%;height:100%}
+.hero-foot{
+  position:absolute;bottom:0;left:0;right:0;z-index:2;
+  display:grid;grid-template-columns:200px 1fr auto;
+  align-items:end;
+  padding:2rem 2.5rem;
+  border-top:1px solid rgba(255,255,255,0.07);
+}
+.hero-caption{font-size:0.62rem;letter-spacing:0.12em;color:rgba(255,255,255,0.35);font-weight:300}
+.hero-scroll{
+  display:flex;align-items:center;gap:0.8rem;
+  font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(255,255,255,0.3);
+}
+.hero-scroll::before{content:'';display:block;width:36px;height:1px;background:rgba(255,255,255,0.2)}
+
+/* INTRO ROW */
+.intro{
+  display:grid;grid-template-columns:200px 1fr 1fr;
+  border-top:1px solid var(--border);
+}
+.intro-label{
+  padding:4rem 2.5rem;border-right:1px solid var(--border);
+  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--mid);font-weight:400;
+}
+.intro-left{
+  padding:4rem 3.5rem;border-right:1px solid var(--border);
+}
+.intro-right{
+  padding:4rem 3rem;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.intro-quote{
+  font-family:var(--serif);font-style:italic;
+  font-size:1.1rem;line-height:1.7;color:var(--mid);
+  border-left:2px solid var(--border);padding-left:1.5rem;
+  margin-bottom:2rem;
+}
+.intro-quote cite{
+  display:block;margin-top:0.8rem;
+  font-family:var(--sans);font-style:normal;
+  font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);
+}
+
+/* EXPERTISE GRID */
+.exp-section{border-top:1px solid var(--border)}
+.exp-header{
+  display:grid;grid-template-columns:200px 1fr;
+  border-bottom:1px solid var(--border);
+}
+.exp-header-label{
+  padding:2.2rem 2.5rem;border-right:1px solid var(--border);
+  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);font-weight:400;
+}
+.exp-header-text{
+  padding:2.2rem 3rem;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.exp-header-text h2{font-family:var(--serif);font-size:1.6rem;font-weight:400}
+.exp-grid{
+  display:grid;
+  grid-template-columns:200px repeat(3,1fr);
+  border-bottom:1px solid var(--border);
+}
+.exp-blank{border-right:1px solid var(--border)}
+.exp-card{
+  border-right:1px solid var(--border);
+  overflow:hidden;cursor:pointer;
+}
+.exp-card:last-child{border-right:none}
+.exp-img{overflow:hidden;aspect-ratio:4/5}
+.exp-img svg{width:100%;height:100%;display:block;transition:transform 0.6s ease}
+.exp-card:hover .exp-img svg{transform:scale(1.04)}
+.exp-info{
+  padding:1.5rem 1.8rem 2rem;
+  border-top:1px solid var(--border);
+}
+.exp-title{font-size:0.92rem;font-weight:400;margin-bottom:0.5rem;line-height:1.3}
+.exp-desc{font-size:0.75rem;font-weight:300;color:var(--mid);line-height:1.6;margin-bottom:1rem}
+.exp-arrow{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--mid);transition:color 0.2s,gap 0.2s;
+}
+.exp-card:hover .exp-arrow{color:var(--black);gap:0.8rem}
+.exp-arrow svg{width:18px;height:8px;stroke:currentColor;fill:none;stroke-width:1.2}
+
+/* SECOND EXPERTISE ROW — wider cards */
+.exp-grid-2{
+  display:grid;
+  grid-template-columns:200px repeat(2,1fr) 200px;
+  border-bottom:1px solid var(--border);
+}
+.exp-card-wide{
+  border-right:1px solid var(--border);
+  overflow:hidden;cursor:pointer;
+}
+.exp-card-wide:last-child{border-right:none}
+.exp-img-wide{overflow:hidden;aspect-ratio:16/9}
+.exp-img-wide svg{width:100%;height:100%;display:block;transition:transform 0.6s ease}
+.exp-card-wide:hover .exp-img-wide svg{transform:scale(1.04)}
+.exp-end-block{
+  border-left:1px solid var(--border);
+  padding:2.5rem;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  background:var(--off);
+}
+.exp-end-num{
+  font-family:var(--serif);font-size:3rem;color:var(--border);font-weight:400;line-height:1;margin-bottom:1rem;
+}
+.exp-end-text{font-size:0.75rem;color:var(--mid);font-weight:300;line-height:1.7}
+
+/* NEWS strip */
+.news-strip{
+  border-top:1px solid var(--border);
+  display:grid;grid-template-columns:200px repeat(3,1fr);
+}
+.news-strip-label{
+  padding:3rem 2.5rem;border-right:1px solid var(--border);
+  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);font-weight:400;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.news-card{
+  border-right:1px solid var(--border);padding:2.5rem 2rem;
+  cursor:pointer;transition:background 0.2s;
+}
+.news-card:last-child{border-right:none}
+.news-card:hover{background:var(--off)}
+.news-date{font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);margin-bottom:0.8rem;font-weight:400}
+.news-title{font-size:0.88rem;font-weight:400;line-height:1.5;color:var(--black);margin-bottom:1.2rem}
+.news-card:hover .news-title{color:var(--mid)}
+.news-tag{
+  display:inline-block;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;
+  border:1px solid var(--border);padding:0.2rem 0.6rem;color:var(--mid);font-weight:400;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Axiom</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Expertise</a></li>
+    <li><a href="process.html">Process</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-search">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L22 22"/></svg>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <svg viewBox="0 0 1440 860" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#080c10"/><stop offset="100%" stop-color="#0e1318"/>
+      </linearGradient>
+      <linearGradient id="grdG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#10141a"/><stop offset="100%" stop-color="#080c10"/>
+      </linearGradient>
+    </defs>
+    <rect width="1440" height="860" fill="url(#skyG)"/>
+    <!-- Stars -->
+    <circle cx="80" cy="60" r="0.8" fill="rgba(255,255,255,0.45)"/>
+    <circle cx="240" cy="35" r="0.6" fill="rgba(255,255,255,0.3)"/>
+    <circle cx="430" cy="80" r="1" fill="rgba(255,255,255,0.35)"/>
+    <circle cx="900" cy="45" r="0.8" fill="rgba(255,255,255,0.4)"/>
+    <circle cx="1100" cy="70" r="0.6" fill="rgba(255,255,255,0.3)"/>
+    <circle cx="1350" cy="40" r="1" fill="rgba(255,255,255,0.35)"/>
+    <circle cx="680" cy="25" r="0.7" fill="rgba(255,255,255,0.3)"/>
+    <!-- Moon -->
+    <circle cx="1280" cy="90" r="18" fill="#141c24"/>
+    <circle cx="1286" cy="86" r="18" fill="#0c1218"/>
+    <!-- Main tower -->
+    <rect x="560" y="40" width="320" height="780" fill="#111820"/>
+    <rect x="560" y="40" width="320" height="780" fill="none" stroke="rgba(180,210,240,0.18)" stroke-width="0.8"/>
+    <!-- Setback -->
+    <rect x="600" y="0" width="240" height="55" fill="#0e1620"/>
+    <rect x="600" y="0" width="240" height="55" fill="none" stroke="rgba(180,210,240,0.12)" stroke-width="0.6"/>
+    <!-- Vertical mullions -->
+    <line x1="613" y1="40" x2="613" y2="820" stroke="rgba(180,210,240,0.07)" stroke-width="0.7"/>
+    <line x1="646" y1="40" x2="646" y2="820" stroke="rgba(180,210,240,0.07)" stroke-width="0.7"/>
+    <line x1="679" y1="40" x2="679" y2="820" stroke="rgba(180,210,240,0.07)" stroke-width="0.7"/>
+    <line x1="712" y1="40" x2="712" y2="820" stroke="rgba(180,210,240,0.07)" stroke-width="0.7"/>
+    <line x1="745" y1="40" x2="745" y2="820" stroke="rgba(180,210,240,0.07)" stroke-width="0.7"/>
+    <line x1="778" y1="40" x2="778" y2="820" stroke="rgba(180,210,240,0.07)" stroke-width="0.7"/>
+    <line x1="811" y1="40" x2="811" y2="820" stroke="rgba(180,210,240,0.07)" stroke-width="0.7"/>
+    <line x1="844" y1="40" x2="844" y2="820" stroke="rgba(180,210,240,0.07)" stroke-width="0.7"/>
+    <!-- Horizontal spandrels -->
+    <line x1="560" y1="110" x2="880" y2="110" stroke="rgba(180,210,240,0.055)" stroke-width="0.6"/>
+    <line x1="560" y1="170" x2="880" y2="170" stroke="rgba(180,210,240,0.055)" stroke-width="0.6"/>
+    <line x1="560" y1="230" x2="880" y2="230" stroke="rgba(180,210,240,0.055)" stroke-width="0.6"/>
+    <line x1="560" y1="290" x2="880" y2="290" stroke="rgba(180,210,240,0.055)" stroke-width="0.6"/>
+    <line x1="560" y1="350" x2="880" y2="350" stroke="rgba(180,210,240,0.055)" stroke-width="0.6"/>
+    <line x1="560" y1="410" x2="880" y2="410" stroke="rgba(180,210,240,0.055)" stroke-width="0.6"/>
+    <line x1="560" y1="470" x2="880" y2="470" stroke="rgba(180,210,240,0.055)" stroke-width="0.6"/>
+    <line x1="560" y1="530" x2="880" y2="530" stroke="rgba(180,210,240,0.055)" stroke-width="0.6"/>
+    <line x1="560" y1="590" x2="880" y2="590" stroke="rgba(180,210,240,0.055)" stroke-width="0.6"/>
+    <line x1="560" y1="650" x2="880" y2="650" stroke="rgba(180,210,240,0.055)" stroke-width="0.6"/>
+    <line x1="560" y1="710" x2="880" y2="710" stroke="rgba(180,210,240,0.055)" stroke-width="0.6"/>
+    <line x1="560" y1="770" x2="880" y2="770" stroke="rgba(180,210,240,0.055)" stroke-width="0.6"/>
+    <!-- Warm lit windows -->
+    <rect x="567" y="118" width="27" height="44" fill="rgba(255,220,160,0.10)"/>
+    <rect x="618" y="178" width="27" height="44" fill="rgba(255,220,160,0.14)"/>
+    <rect x="750" y="118" width="27" height="44" fill="rgba(180,210,240,0.08)"/>
+    <rect x="815" y="238" width="27" height="44" fill="rgba(255,220,160,0.12)"/>
+    <rect x="567" y="298" width="27" height="44" fill="rgba(180,210,240,0.09)"/>
+    <rect x="683" y="358" width="27" height="44" fill="rgba(255,220,160,0.16)"/>
+    <rect x="848" y="418" width="27" height="44" fill="rgba(255,220,160,0.10)"/>
+    <rect x="618" y="478" width="27" height="44" fill="rgba(180,210,240,0.08)"/>
+    <rect x="750" y="538" width="27" height="44" fill="rgba(255,220,160,0.13)"/>
+    <rect x="567" y="598" width="27" height="44" fill="rgba(180,210,240,0.07)"/>
+    <rect x="815" y="658" width="27" height="44" fill="rgba(255,220,160,0.11)"/>
+    <rect x="683" y="718" width="27" height="44" fill="rgba(180,210,240,0.09)"/>
+    <!-- Left podium -->
+    <rect x="180" y="600" width="380" height="220" fill="#0f1420"/>
+    <rect x="180" y="600" width="380" height="220" fill="none" stroke="rgba(180,210,240,0.1)" stroke-width="0.6"/>
+    <line x1="240" y1="600" x2="240" y2="820" stroke="rgba(180,210,240,0.05)" stroke-width="0.5"/>
+    <line x1="300" y1="600" x2="300" y2="820" stroke="rgba(180,210,240,0.05)" stroke-width="0.5"/>
+    <line x1="360" y1="600" x2="360" y2="820" stroke="rgba(180,210,240,0.05)" stroke-width="0.5"/>
+    <line x1="420" y1="600" x2="420" y2="820" stroke="rgba(180,210,240,0.05)" stroke-width="0.5"/>
+    <line x1="480" y1="600" x2="480" y2="820" stroke="rgba(180,210,240,0.05)" stroke-width="0.5"/>
+    <line x1="180" y1="660" x2="560" y2="660" stroke="rgba(180,210,240,0.04)" stroke-width="0.5"/>
+    <line x1="180" y1="720" x2="560" y2="720" stroke="rgba(180,210,240,0.04)" stroke-width="0.5"/>
+    <line x1="180" y1="780" x2="560" y2="780" stroke="rgba(180,210,240,0.04)" stroke-width="0.5"/>
+    <rect x="193" y="668" width="38" height="46" fill="rgba(255,220,160,0.07)"/>
+    <rect x="313" y="728" width="38" height="30" fill="rgba(180,210,240,0.06)"/>
+    <rect x="433" y="668" width="38" height="46" fill="rgba(255,220,160,0.09)"/>
+    <!-- Right podium -->
+    <rect x="880" y="620" width="380" height="200" fill="#0f1420"/>
+    <rect x="880" y="620" width="380" height="200" fill="none" stroke="rgba(180,210,240,0.1)" stroke-width="0.6"/>
+    <line x1="940" y1="620" x2="940" y2="820" stroke="rgba(180,210,240,0.05)" stroke-width="0.5"/>
+    <line x1="1000" y1="620" x2="1000" y2="820" stroke="rgba(180,210,240,0.05)" stroke-width="0.5"/>
+    <line x1="1060" y1="620" x2="1060" y2="820" stroke="rgba(180,210,240,0.05)" stroke-width="0.5"/>
+    <line x1="1120" y1="620" x2="1120" y2="820" stroke="rgba(180,210,240,0.05)" stroke-width="0.5"/>
+    <line x1="1180" y1="620" x2="1180" y2="820" stroke="rgba(180,210,240,0.05)" stroke-width="0.5"/>
+    <line x1="1240" y1="620" x2="1240" y2="820" stroke="rgba(180,210,240,0.05)" stroke-width="0.5"/>
+    <line x1="880" y1="680" x2="1260" y2="680" stroke="rgba(180,210,240,0.04)" stroke-width="0.5"/>
+    <line x1="880" y1="750" x2="1260" y2="750" stroke="rgba(180,210,240,0.04)" stroke-width="0.5"/>
+    <rect x="893" y="688" width="38" height="46" fill="rgba(255,220,160,0.08)"/>
+    <rect x="1073" y="758" width="38" height="30" fill="rgba(180,210,240,0.07)"/>
+    <rect x="1193" y="688" width="38" height="46" fill="rgba(255,220,160,0.10)"/>
+    <!-- Ground -->
+    <rect x="0" y="820" width="1440" height="40" fill="url(#grdG)"/>
+    <line x1="0" y1="820" x2="1440" y2="820" stroke="rgba(180,210,240,0.12)" stroke-width="0.5"/>
+    <!-- Ground reflections -->
+    <rect x="560" y="820" width="320" height="40" fill="rgba(180,210,240,0.03)"/>
+  </svg>
+  <div class="hero-foot">
+    <span class="hero-caption">Axiom · Global Architecture Studio · Est. 2001</span>
+    <span></span>
+    <span class="hero-scroll">Scroll to explore</span>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="intro-label">Studio</div>
+  <div class="intro-left">
+    <h2 class="s-heading reveal">Architecture &amp;<br><em>engineering</em><br>that endures</h2>
+    <p class="s-text reveal">We are a global studio for sustainable architecture, urbanism, engineering and design. Our people collaborate across studios on four continents, united by a conviction that good design is inseparable from environmental responsibility.</p>
+    <p class="s-text reveal">Every project we undertake begins with a rigorous understanding of place — its climate, culture, topography, and history — before a single line is drawn.</p>
+    <br>
+    <a href="process.html" class="p-link reveal">Our Process →</a>
+  </div>
+  <div class="intro-right">
+    <blockquote class="intro-quote reveal">
+      Good design is not a luxury. It is a necessity — for the people who inhabit our buildings, and for the planet that sustains us all.
+      <cite>— Axiom Founding Principles</cite>
+    </blockquote>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;border-top:1px solid var(--border);padding-top:2rem">
+      <div>
+        <div style="font-family:var(--serif);font-size:2.5rem;font-weight:400;line-height:1;margin-bottom:0.4rem">24</div>
+        <div style="font-size:0.68rem;color:var(--mid);letter-spacing:0.08em;text-transform:uppercase;font-weight:400">Studios worldwide</div>
+      </div>
+      <div>
+        <div style="font-family:var(--serif);font-size:2.5rem;font-weight:400;line-height:1;margin-bottom:0.4rem">400+</div>
+        <div style="font-size:0.68rem;color:var(--mid);letter-spacing:0.08em;text-transform:uppercase;font-weight:400">Projects delivered</div>
+      </div>
+      <div>
+        <div style="font-family:var(--serif);font-size:2.5rem;font-weight:400;line-height:1;margin-bottom:0.4rem">60</div>
+        <div style="font-size:0.68rem;color:var(--mid);letter-spacing:0.08em;text-transform:uppercase;font-weight:400">Years in practice</div>
+      </div>
+      <div>
+        <div style="font-family:var(--serif);font-size:2.5rem;font-weight:400;line-height:1;margin-bottom:0.4rem">38</div>
+        <div style="font-size:0.68rem;color:var(--mid);letter-spacing:0.08em;text-transform:uppercase;font-weight:400">Major awards</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE GRID -->
+<section class="exp-section">
+  <div class="exp-header">
+    <div class="exp-header-label">Expertise</div>
+    <div class="exp-header-text">
+      <h2>What we do</h2>
+      <a href="projects.html" class="p-link" style="font-size:0.62rem">All Projects →</a>
+    </div>
+  </div>
+
+  <!-- Row 1: 3 cards -->
+  <div class="exp-grid">
+    <div class="exp-blank"></div>
+    <div class="exp-card">
+      <div class="exp-img">
+        <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="500" fill="#111820"/>
+          <!-- Tower cross-section / structure -->
+          <rect x="80" y="30" width="240" height="440" fill="#141c28"/>
+          <rect x="80" y="30" width="240" height="440" fill="none" stroke="rgba(180,210,240,0.18)" stroke-width="0.8"/>
+          <!-- Structural floors -->
+          <line x1="80" y1="100" x2="320" y2="100" stroke="rgba(180,210,240,0.1)" stroke-width="0.6"/>
+          <line x1="80" y1="180" x2="320" y2="180" stroke="rgba(180,210,240,0.1)" stroke-width="0.6"/>
+          <line x1="80" y1="260" x2="320" y2="260" stroke="rgba(180,210,240,0.1)" stroke-width="0.6"/>
+          <line x1="80" y1="340" x2="320" y2="340" stroke="rgba(180,210,240,0.1)" stroke-width="0.6"/>
+          <line x1="80" y1="400" x2="320" y2="400" stroke="rgba(180,210,240,0.1)" stroke-width="0.6"/>
+          <!-- Mullions -->
+          <line x1="140" y1="30" x2="140" y2="470" stroke="rgba(180,210,240,0.07)" stroke-width="0.6"/>
+          <line x1="200" y1="30" x2="200" y2="470" stroke="rgba(180,210,240,0.07)" stroke-width="0.6"/>
+          <line x1="260" y1="30" x2="260" y2="470" stroke="rgba(180,210,240,0.07)" stroke-width="0.6"/>
+          <!-- Lit panels -->
+          <rect x="88" y="108" width="44" height="64" fill="rgba(255,220,160,0.12)"/>
+          <rect x="208" y="188" width="44" height="64" fill="rgba(180,210,240,0.10)"/>
+          <rect x="148" y="268" width="44" height="64" fill="rgba(255,220,160,0.14)"/>
+          <rect x="268" y="348" width="44" height="44" fill="rgba(180,210,240,0.09)"/>
+          <rect x="88" y="348" width="44" height="44" fill="rgba(255,220,160,0.10)"/>
+          <!-- Ground line -->
+          <line x1="0" y1="470" x2="400" y2="470" stroke="rgba(180,210,240,0.1)" stroke-width="0.5"/>
+          <!-- Sky -->
+          <rect width="400" height="60" fill="rgba(8,12,18,0.8)"/>
+        </svg>
+      </div>
+      <div class="exp-info">
+        <div class="exp-title">Architecture</div>
+        <div class="exp-desc">Buildings of every scale and typology — from civic icons to private residences — conceived with rigour and craft.</div>
+        <div class="exp-arrow">Explore <svg viewBox="0 0 20 8"><path d="M0 4h18M14 1l4 3-4 3"/></svg></div>
+      </div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-img">
+        <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="500" fill="#181820"/>
+          <!-- Parametric/engineering mesh -->
+          <polygon points="200,40 320,150 280,300 120,300 80,150" fill="none" stroke="rgba(160,160,220,0.18)" stroke-width="0.9"/>
+          <polygon points="200,40 320,150 280,300 120,300 80,150" fill="rgba(160,160,220,0.02)"/>
+          <!-- Internal structure lines -->
+          <line x1="200" y1="40" x2="200" y2="300" stroke="rgba(160,160,220,0.12)" stroke-width="0.6"/>
+          <line x1="80" y1="150" x2="320" y2="150" stroke="rgba(160,160,220,0.12)" stroke-width="0.6"/>
+          <line x1="120" y1="300" x2="280" y2="300" stroke="rgba(160,160,220,0.12)" stroke-width="0.6"/>
+          <line x1="80" y1="150" x2="280" y2="300" stroke="rgba(160,160,220,0.06)" stroke-width="0.5"/>
+          <line x1="320" y1="150" x2="120" y2="300" stroke="rgba(160,160,220,0.06)" stroke-width="0.5"/>
+          <line x1="200" y1="40" x2="120" y2="300" stroke="rgba(160,160,220,0.06)" stroke-width="0.5"/>
+          <line x1="200" y1="40" x2="280" y2="300" stroke="rgba(160,160,220,0.06)" stroke-width="0.5"/>
+          <!-- Nodes -->
+          <circle cx="200" cy="40" r="4" fill="rgba(160,160,220,0.7)"/>
+          <circle cx="320" cy="150" r="3" fill="rgba(160,160,220,0.5)"/>
+          <circle cx="280" cy="300" r="3" fill="rgba(160,160,220,0.5)"/>
+          <circle cx="120" cy="300" r="3" fill="rgba(160,160,220,0.5)"/>
+          <circle cx="80" cy="150" r="3" fill="rgba(160,160,220,0.5)"/>
+          <circle cx="200" cy="150" r="4" fill="rgba(160,160,220,0.6)"/>
+          <!-- Secondary mesh detail -->
+          <polygon points="200,150 260,220 140,220" fill="none" stroke="rgba(160,160,220,0.1)" stroke-width="0.5"/>
+          <circle cx="260" cy="220" r="2" fill="rgba(160,160,220,0.4)"/>
+          <circle cx="140" cy="220" r="2" fill="rgba(160,160,220,0.4)"/>
+          <!-- Ground -->
+          <line x1="0" y1="470" x2="400" y2="470" stroke="rgba(160,160,220,0.08)" stroke-width="0.5"/>
+          <!-- Dimension annotation -->
+          <line x1="60" y1="40" x2="60" y2="300" stroke="rgba(160,160,220,0.15)" stroke-width="0.5"/>
+          <line x1="55" y1="40" x2="65" y2="40" stroke="rgba(160,160,220,0.15)" stroke-width="0.5"/>
+          <line x1="55" y1="300" x2="65" y2="300" stroke="rgba(160,160,220,0.15)" stroke-width="0.5"/>
+        </svg>
+      </div>
+      <div class="exp-info">
+        <div class="exp-title">Engineering</div>
+        <div class="exp-desc">Structural, mechanical and environmental engineering integrated from first principles — not appended at the end.</div>
+        <div class="exp-arrow">Explore <svg viewBox="0 0 20 8"><path d="M0 4h18M14 1l4 3-4 3"/></svg></div>
+      </div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-img">
+        <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="500" fill="#1a1e18"/>
+          <!-- Urban masterplan view -->
+          <rect x="20" y="20" width="360" height="440" fill="#1e261e"/>
+          <!-- City blocks — plan -->
+          <rect x="30" y="30" width="100" height="70" fill="#162016"/>
+          <rect x="30" y="110" width="100" height="50" fill="#1a241a"/>
+          <rect x="30" y="170" width="100" height="90" fill="#162016"/>
+          <rect x="30" y="270" width="100" height="60" fill="#1a241a"/>
+          <rect x="30" y="340" width="100" height="80" fill="#162016"/>
+          <rect x="145" y="30" width="70" height="130" fill="#1a241a"/>
+          <rect x="145" y="170" width="70" height="100" fill="#162016"/>
+          <rect x="145" y="280" width="70" height="140" fill="#1a241a"/>
+          <rect x="230" y="30" width="110" height="80" fill="#162016"/>
+          <rect x="230" y="120" width="110" height="70" fill="#1a241a"/>
+          <rect x="230" y="200" width="110" height="100" fill="#162016"/>
+          <rect x="230" y="310" width="110" height="110" fill="#1a241a"/>
+          <!-- Park / green space accent -->
+          <rect x="145" y="170" width="70" height="100" fill="rgba(80,150,80,0.15)"/>
+          <!-- Streets visible as gaps -->
+          <!-- Scale + North -->
+          <line x1="30" y1="435" x2="130" y2="435" stroke="rgba(160,200,160,0.3)" stroke-width="1"/>
+          <line x1="30" y1="432" x2="30" y2="438" stroke="rgba(160,200,160,0.3)" stroke-width="1"/>
+          <line x1="130" y1="432" x2="130" y2="438" stroke="rgba(160,200,160,0.3)" stroke-width="1"/>
+          <text x="55" y="428" font-size="8" fill="rgba(160,200,160,0.3)" font-family="monospace" letter-spacing="1">200m</text>
+          <line x1="355" y1="435" x2="355" y2="410" stroke="rgba(160,200,160,0.4)" stroke-width="1"/>
+          <polygon points="355,405 351,418 355,414 359,418" fill="rgba(160,200,160,0.5)"/>
+          <text x="352" y="445" font-size="8" fill="rgba(160,200,160,0.4)" font-family="monospace">N</text>
+        </svg>
+      </div>
+      <div class="exp-info">
+        <div class="exp-title">Urban + Landscape Design</div>
+        <div class="exp-desc">Master planning, urban design and landscape architecture at the scale of cities, districts and public spaces.</div>
+        <div class="exp-arrow">Explore <svg viewBox="0 0 20 8"><path d="M0 4h18M14 1l4 3-4 3"/></svg></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 2: 2 wide cards -->
+  <div class="exp-grid-2">
+    <div class="exp-blank"></div>
+    <div class="exp-card-wide">
+      <div class="exp-img-wide">
+        <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="600" height="300" fill="#1a1814"/>
+          <!-- Interior section — warm -->
+          <path d="M0 300 L0 120 Q300 40 600 120 L600 300 Z" fill="#201c18"/>
+          <path d="M0 120 Q300 40 600 120" fill="none" stroke="rgba(220,190,150,0.18)" stroke-width="1.2"/>
+          <!-- Structural ribs -->
+          <line x1="100" y1="103" x2="100" y2="300" stroke="rgba(220,190,150,0.07)" stroke-width="0.6"/>
+          <line x1="200" y1="72" x2="200" y2="300" stroke="rgba(220,190,150,0.07)" stroke-width="0.6"/>
+          <line x1="300" y1="40" x2="300" y2="300" stroke="rgba(220,190,150,0.1)" stroke-width="0.8"/>
+          <line x1="400" y1="72" x2="400" y2="300" stroke="rgba(220,190,150,0.07)" stroke-width="0.6"/>
+          <line x1="500" y1="103" x2="500" y2="300" stroke="rgba(220,190,150,0.07)" stroke-width="0.6"/>
+          <!-- Floor levels -->
+          <line x1="0" y1="180" x2="600" y2="180" stroke="rgba(220,190,150,0.06)" stroke-width="0.5"/>
+          <line x1="0" y1="230" x2="600" y2="230" stroke="rgba(220,190,150,0.06)" stroke-width="0.5"/>
+          <!-- Interior glow through glass ceiling -->
+          <path d="M150 88 Q300 50 450 88 L440 130 Q300 92 160 130 Z" fill="rgba(255,240,200,0.04)"/>
+          <!-- People scale -->
+          <rect x="195" y="225" width="5" height="18" fill="rgba(220,190,150,0.2)"/>
+          <circle cx="197" cy="222" r="4" fill="rgba(220,190,150,0.2)"/>
+          <rect x="385" y="222" width="5" height="21" fill="rgba(220,190,150,0.18)"/>
+          <circle cx="387" cy="219" r="4" fill="rgba(220,190,150,0.18)"/>
+          <!-- Sky -->
+          <rect width="600" height="80" fill="rgba(14,10,8,0.6)"/>
+        </svg>
+      </div>
+      <div class="exp-info">
+        <div class="exp-title">Interiors</div>
+        <div class="exp-desc">Interior design as an extension of architecture — spaces that work beautifully for the people within them.</div>
+        <div class="exp-arrow">Explore <svg viewBox="0 0 20 8"><path d="M0 4h18M14 1l4 3-4 3"/></svg></div>
+      </div>
+    </div>
+    <div class="exp-card-wide">
+      <div class="exp-img-wide">
+        <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="600" height="300" fill="#101a10"/>
+          <!-- Sustainability / green building -->
+          <rect x="60" y="60" width="480" height="240" fill="#131e13"/>
+          <rect x="60" y="60" width="480" height="240" fill="none" stroke="rgba(120,180,120,0.15)" stroke-width="0.7"/>
+          <!-- Terrace steps with greenery -->
+          <rect x="60" y="60" width="480" height="40" fill="#101810"/>
+          <rect x="80" y="65" width="440" height="20" fill="rgba(60,130,60,0.18)"/>
+          <rect x="100" y="100" width="400" height="35" fill="#121a12"/>
+          <rect x="120" y="106" width="360" height="18" fill="rgba(60,130,60,0.14)"/>
+          <rect x="140" y="135" width="320" height="30" fill="#141c14"/>
+          <rect x="160" y="140" width="280" height="16" fill="rgba(60,130,60,0.20)"/>
+          <!-- Curtain wall -->
+          <line x1="60" y1="165" x2="540" y2="165" stroke="rgba(120,180,120,0.07)" stroke-width="0.5"/>
+          <line x1="60" y1="210" x2="540" y2="210" stroke="rgba(120,180,120,0.07)" stroke-width="0.5"/>
+          <line x1="60" y1="255" x2="540" y2="255" stroke="rgba(120,180,120,0.07)" stroke-width="0.5"/>
+          <line x1="130" y1="60" x2="130" y2="300" stroke="rgba(120,180,120,0.05)" stroke-width="0.5"/>
+          <line x1="200" y1="60" x2="200" y2="300" stroke="rgba(120,180,120,0.05)" stroke-width="0.5"/>
+          <line x1="270" y1="60" x2="270" y2="300" stroke="rgba(120,180,120,0.05)" stroke-width="0.5"/>
+          <line x1="340" y1="60" x2="340" y2="300" stroke="rgba(120,180,120,0.05)" stroke-width="0.5"/>
+          <line x1="410" y1="60" x2="410" y2="300" stroke="rgba(120,180,120,0.05)" stroke-width="0.5"/>
+          <line x1="480" y1="60" x2="480" y2="300" stroke="rgba(120,180,120,0.05)" stroke-width="0.5"/>
+          <!-- Trees -->
+          <ellipse cx="30" cy="230" rx="20" ry="28" fill="rgba(50,110,50,0.25)"/>
+          <rect x="29" y="230" width="3" height="70" fill="rgba(50,110,50,0.2)"/>
+          <ellipse cx="570" cy="218" rx="18" ry="26" fill="rgba(50,110,50,0.22)"/>
+          <rect x="569" y="218" width="3" height="82" fill="rgba(50,110,50,0.2)"/>
+          <!-- Solar panels on roof hint -->
+          <rect x="180" y="42" width="240" height="18" fill="rgba(50,90,140,0.2)"/>
+          <line x1="180" y1="51" x2="420" y2="51" stroke="rgba(50,90,140,0.15)" stroke-width="0.5"/>
+          <line x1="240" y1="42" x2="240" y2="60" stroke="rgba(50,90,140,0.15)" stroke-width="0.5"/>
+          <line x1="300" y1="42" x2="300" y2="60" stroke="rgba(50,90,140,0.15)" stroke-width="0.5"/>
+          <line x1="360" y1="42" x2="360" y2="60" stroke="rgba(50,90,140,0.15)" stroke-width="0.5"/>
+          <!-- Sky -->
+          <rect width="600" height="60" fill="rgba(8,12,8,0.7)"/>
+        </svg>
+      </div>
+      <div class="exp-info">
+        <div class="exp-title">Sustainable Design</div>
+        <div class="exp-desc">Net-zero carbon design embedded from project inception — not retrofitted as an afterthought.</div>
+        <div class="exp-arrow">Explore <svg viewBox="0 0 20 8"><path d="M0 4h18M14 1l4 3-4 3"/></svg></div>
+      </div>
+    </div>
+    <div class="exp-end-block">
+      <div class="exp-end-num">05</div>
+      <div class="exp-end-text">Areas of expertise spanning every dimension of the built environment.</div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS STRIP -->
+<section class="news-strip">
+  <div class="news-strip-label">
+    <span>Latest News</span>
+    <a href="#" class="p-link" style="font-size:0.62rem">All News →</a>
+  </div>
+  <div class="news-card">
+    <div class="news-date">June 2026</div>
+    <div class="news-title">Axiom wins commission for new international terminal at Entebbe Airport</div>
+    <span class="news-tag">Aviation</span>
+  </div>
+  <div class="news-card">
+    <div class="news-date">May 2026</div>
+    <div class="news-title">Our mixed-use tower in Nairobi reaches structural completion ahead of schedule</div>
+    <span class="news-tag">Commercial</span>
+  </div>
+  <div class="news-card">
+    <div class="news-date">April 2026</div>
+    <div class="news-title">New publication: Designing for Climate — a field guide for tropical architecture</div>
+    <span class="news-tag">Publication</span>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">
+    <div class="footer-wordmark">Axiom</div>
+    <div class="footer-tagline">Architecture, Engineering &amp; Design</div>
+    <div class="footer-socials">
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Pinterest</a>
+      <a href="#">YouTube</a>
+    </div>
+  </div>
+  <div class="footer-nav">
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <ul>
+        <li><a href="index.html">Expertise</a></li>
+        <li><a href="process.html">Process</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Expertise</h4>
+      <ul>
+        <li><a href="#">Architecture</a></li>
+        <li><a href="#">Engineering</a></li>
+        <li><a href="#">Interiors</a></li>
+        <li><a href="#">Urban Design</a></li>
+        <li><a href="#">Sustainability</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <div class="footer-bottom-l">Axiom Architecture</div>
+  <div class="footer-bottom-r">
+    <span>© 2026 Axiom. All Rights Reserved.</span>
+    <a href="#">Privacy Policy</a>
+  </div>
+</div>
+
+<script>
+const obs = new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}}),{threshold:0.15});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+</script>
+</body>
+</html>

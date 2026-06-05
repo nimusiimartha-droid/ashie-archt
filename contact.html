@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Axiom Architecture</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* CONTACT HERO */
+.cont-hero{
+  margin-top:54px;
+  height:55vh;min-height:360px;
+  position:relative;overflow:hidden;background:#0e1014;
+  display:flex;align-items:flex-end;
+}
+.cont-hero svg{position:absolute;inset:0;width:100%;height:100%}
+.cont-hero-content{
+  position:relative;z-index:2;width:100%;
+  padding:3rem 2.5rem;
+  display:grid;grid-template-columns:200px 1fr;
+  border-top:1px solid rgba(255,255,255,0.07);
+}
+.cont-hero-label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);font-weight:400}
+.cont-hero-title{font-family:var(--serif);font-size:clamp(2.8rem,5vw,5rem);font-weight:400;line-height:1.05;color:var(--white)}
+.cont-hero-title em{font-style:italic}
+
+/* CONTACT LAYOUT */
+.contact-body{
+  display:grid;grid-template-columns:200px 1fr 1fr;
+  border-top:1px solid var(--border);
+  min-height:70vh;
+}
+.contact-side-label{
+  padding:4rem 2.5rem;
+  border-right:1px solid var(--border);
+  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--mid);font-weight:400;
+}
+/* LEFT — info column */
+.contact-info{
+  padding:4rem 3.5rem;
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;gap:3rem;
+}
+.contact-heading{
+  font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:400;line-height:1.2;
+}
+.contact-heading em{font-style:italic}
+.contact-intro{font-size:0.88rem;line-height:1.9;font-weight:300;color:#555;max-width:400px}
+
+.office-block{display:flex;flex-direction:column;gap:0.35rem}
+.office-city{
+  font-family:var(--serif);font-size:1rem;font-weight:400;margin-bottom:0.2rem;
+}
+.office-line{font-size:0.78rem;font-weight:300;color:var(--mid);line-height:1.7}
+.office-email{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-size:0.72rem;font-weight:300;
+  color:var(--black);text-decoration:none;
+  border-bottom:1px solid var(--border);padding-bottom:1px;
+  margin-top:0.4rem;transition:border-color 0.2s,color 0.2s;
+}
+.office-email:hover{color:var(--mid);border-color:var(--mid)}
+
+.offices-divider{height:1px;background:var(--border)}
+
+/* RIGHT — form column */
+.contact-form{
+  padding:4rem 3.5rem;
+  display:flex;flex-direction:column;gap:0;
+}
+.form-heading{
+  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--mid);margin-bottom:2.5rem;font-weight:400;
+}
+.form-field{
+  display:flex;flex-direction:column;gap:0.4rem;
+  border-bottom:1px solid var(--border);
+  padding:1.4rem 0;
+}
+.form-field:first-of-type{border-top:1px solid var(--border)}
+.form-label{
+  font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--mid);font-weight:400;font-family:var(--sans);
+}
+.form-input{
+  background:none;border:none;outline:none;
+  font-family:var(--serif);font-size:1.05rem;font-weight:400;
+  color:var(--black);padding:0.2rem 0;
+  transition:color 0.2s;width:100%;
+}
+.form-input::placeholder{color:var(--border)}
+.form-input:focus{color:var(--black)}
+.form-textarea{
+  background:none;border:none;outline:none;
+  font-family:var(--serif);font-size:1.05rem;font-weight:400;
+  color:var(--black);padding:0.2rem 0;
+  resize:none;min-height:80px;width:100%;
+}
+.form-textarea::placeholder{color:var(--border)}
+.form-select{
+  background:none;border:none;outline:none;
+  font-family:var(--serif);font-size:1.05rem;font-weight:400;
+  color:var(--black);padding:0.2rem 0;width:100%;
+  appearance:none;cursor:pointer;
+}
+.form-select option{font-family:var(--sans)}
+.form-actions{
+  padding-top:2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;
+}
+.form-submit{
+  display:inline-flex;align-items:center;gap:0.8rem;
+  background:var(--black);color:var(--white);
+  padding:1rem 2.5rem;
+  font-family:var(--sans);font-size:0.7rem;font-weight:400;
+  letter-spacing:0.12em;text-transform:uppercase;
+  border:none;cursor:pointer;
+  transition:background 0.2s,gap 0.2s;
+}
+.form-submit:hover{background:#333;gap:1.2rem}
+.form-submit svg{width:16px;height:8px;stroke:currentColor;fill:none;stroke-width:1.2}
+.form-note{font-size:0.68rem;color:var(--mid);font-weight:300;max-width:220px;line-height:1.6}
+
+/* STUDIOS MAP ROW */
+.studios-row{
+  border-top:1px solid var(--border);
+  display:grid;grid-template-columns:200px 1fr;
+}
+.studios-label{
+  padding:3rem 2.5rem;border-right:1px solid var(--border);
+  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);font-weight:400;
+}
+.studios-body{padding:3rem 3rem}
+.studios-grid{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:0;
+  border-top:1px solid var(--border);margin-top:1.5rem;
+}
+.studio-item{
+  padding:1rem 0;
+  border-bottom:1px solid var(--border);
+  border-right:1px solid var(--border);
+}
+.studio-item:nth-child(6n){border-right:none}
+.studio-item a{
+  font-size:0.75rem;font-weight:300;color:var(--mid);
+  text-decoration:none;transition:color 0.2s;
+}
+.studio-item a:hover{color:var(--black)}
+
+/* Careers strip */
+.careers-strip{
+  border-top:1px solid var(--border);
+  background:var(--black);
+  display:grid;grid-template-columns:200px 1fr 1fr;
+}
+.careers-label{
+  padding:3rem 2.5rem;border-right:1px solid rgba(255,255,255,0.07);
+  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.25);font-weight:400;
+}
+.careers-text{
+  padding:3rem 3.5rem;border-right:1px solid rgba(255,255,255,0.07);
+}
+.careers-text h3{font-family:var(--serif);font-size:1.5rem;font-weight:400;color:var(--white);margin-bottom:0.8rem}
+.careers-text h3 em{font-style:italic}
+.careers-text p{font-size:0.82rem;line-height:1.8;font-weight:300;color:rgba(255,255,255,0.45);max-width:360px}
+.careers-links{
+  padding:3rem 3rem;
+  display:flex;flex-direction:column;gap:0;
+  justify-content:center;
+  border-top:none;
+}
+.careers-link-item{
+  padding:0.9rem 0;border-bottom:1px solid rgba(255,255,255,0.07);
+  display:flex;justify-content:space-between;align-items:center;
+  cursor:pointer;transition:opacity 0.2s;
+}
+.careers-link-item:first-child{border-top:1px solid rgba(255,255,255,0.07)}
+.careers-link-item:hover{opacity:0.6}
+.careers-role{font-size:0.82rem;font-weight:300;color:var(--white)}
+.careers-loc{font-size:0.65rem;letter-spacing:0.1em;color:rgba(255,255,255,0.3);text-transform:uppercase}
+.careers-arr{font-size:0.7rem;color:rgba(255,255,255,0.3)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Axiom</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Expertise</a></li>
+    <li><a href="process.html">Process</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <div class="nav-search">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L22 22"/></svg>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="cont-hero">
+  <svg viewBox="0 0 1440 580" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <rect width="1440" height="580" fill="#0c1014"/>
+    <!-- Abstract plan view — like a studio floor plan -->
+    <!-- Outer boundary -->
+    <rect x="80" y="40" width="1280" height="480" fill="none" stroke="rgba(200,210,220,0.08)" stroke-width="0.8"/>
+    <!-- Internal grid — office plan -->
+    <line x1="360" y1="40" x2="360" y2="520" stroke="rgba(200,210,220,0.06)" stroke-width="0.6"/>
+    <line x1="720" y1="40" x2="720" y2="520" stroke="rgba(200,210,220,0.06)" stroke-width="0.8"/>
+    <line x1="1080" y1="40" x2="1080" y2="520" stroke="rgba(200,210,220,0.06)" stroke-width="0.6"/>
+    <line x1="80" y1="200" x2="1360" y2="200" stroke="rgba(200,210,220,0.06)" stroke-width="0.6"/>
+    <line x1="80" y1="360" x2="1360" y2="360" stroke="rgba(200,210,220,0.06)" stroke-width="0.6"/>
+    <!-- Rooms / zones -->
+    <rect x="100" y="60" width="240" height="120" fill="rgba(200,210,220,0.03)"/>
+    <rect x="380" y="220" width="320" height="120" fill="rgba(200,210,220,0.03)"/>
+    <rect x="740" y="60" width="320" height="120" fill="rgba(200,210,220,0.03)"/>
+    <rect x="1100" y="220" width="240" height="120" fill="rgba(200,210,220,0.03)"/>
+    <rect x="100" y="380" width="560" height="120" fill="rgba(200,210,220,0.02)"/>
+    <rect x="740" y="380" width="600" height="120" fill="rgba(200,210,220,0.02)"/>
+    <!-- Door arcs hint -->
+    <path d="M100 180 Q130 180 130 210" fill="none" stroke="rgba(200,210,220,0.08)" stroke-width="0.5"/>
+    <path d="M380 200 Q380 230 350 230" fill="none" stroke="rgba(200,210,220,0.08)" stroke-width="0.5"/>
+    <path d="M720 200 Q750 200 750 170" fill="none" stroke="rgba(200,210,220,0.08)" stroke-width="0.5"/>
+  </svg>
+  <div class="cont-hero-content">
+    <span class="cont-hero-label">Contact</span>
+    <div>
+      <h1 class="cont-hero-title">Get in<br><em>touch</em></h1>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTACT BODY -->
+<div class="contact-body">
+  <div class="contact-side-label">Contact</div>
+
+  <!-- INFO COLUMN -->
+  <div class="contact-info">
+    <div>
+      <h2 class="contact-heading reveal">Every project<br>begins with a<br><em>conversation</em></h2>
+      <p class="contact-intro reveal" style="margin-top:1.5rem">Whether you have a fully formed brief or an early idea, we would like to hear from you. We respond to all enquiries within two working days.</p>
+    </div>
+
+    <div class="offices-divider"></div>
+
+    <div class="office-block reveal">
+      <div class="office-city">London — HQ</div>
+      <div class="office-line">22 Buckingham Gate</div>
+      <div class="office-line">London, SW1E 6LB</div>
+      <div class="office-line">United Kingdom</div>
+      <a href="mailto:london@axiom-arch.com" class="office-email">london@axiom-arch.com →</a>
+    </div>
+
+    <div class="offices-divider"></div>
+
+    <div class="office-block reveal">
+      <div class="office-city">Nairobi</div>
+      <div class="office-line">The Promenade, Upper Hill</div>
+      <div class="office-line">Nairobi, 00100</div>
+      <div class="office-line">Kenya</div>
+      <a href="mailto:nairobi@axiom-arch.com" class="office-email">nairobi@axiom-arch.com →</a>
+    </div>
+
+    <div class="offices-divider"></div>
+
+    <div class="office-block reveal">
+      <div class="office-city">Dubai</div>
+      <div class="office-line">Gate Building, DIFC</div>
+      <div class="office-line">Dubai</div>
+      <div class="office-line">United Arab Emirates</div>
+      <a href="mailto:dubai@axiom-arch.com" class="office-email">dubai@axiom-arch.com →</a>
+    </div>
+
+    <div class="offices-divider"></div>
+
+    <div class="office-block reveal">
+      <div class="office-city">Singapore</div>
+      <div class="office-line">1 Raffles Quay, North Tower</div>
+      <div class="office-line">Singapore, 048583</div>
+      <a href="mailto:singapore@axiom-arch.com" class="office-email">singapore@axiom-arch.com →</a>
+    </div>
+  </div>
+
+  <!-- FORM COLUMN -->
+  <div class="contact-form">
+    <div class="form-heading">Send an enquiry</div>
+
+    <div class="form-field">
+      <label class="form-label">Your name</label>
+      <input class="form-input" type="text" placeholder="Full name">
+    </div>
+    <div class="form-field">
+      <label class="form-label">Organisation</label>
+      <input class="form-input" type="text" placeholder="Company or institution">
+    </div>
+    <div class="form-field">
+      <label class="form-label">Email address</label>
+      <input class="form-input" type="email" placeholder="your@email.com">
+    </div>
+    <div class="form-field">
+      <label class="form-label">Project type</label>
+      <select class="form-select">
+        <option value="" disabled selected>Select a category</option>
+        <option>Architecture — New Build</option>
+        <option>Architecture — Renovation</option>
+        <option>Interior Design</option>
+        <option>Urban + Masterplan</option>
+        <option>Engineering Consultancy</option>
+        <option>Sustainable Design</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label class="form-label">Location</label>
+      <input class="form-input" type="text" placeholder="City, country">
+    </div>
+    <div class="form-field">
+      <label class="form-label">Tell us about your project</label>
+      <textarea class="form-textarea" placeholder="Describe your project, timeline, scale and any other relevant context…"></textarea>
+    </div>
+    <div class="form-actions">
+      <button class="form-submit" type="button">
+        Send Enquiry
+        <svg viewBox="0 0 16 8"><path d="M0 4h14M10 1l4 3-4 3"/></svg>
+      </button>
+      <p class="form-note">We treat all enquiries in strict confidence. We respond within two working days.</p>
+    </div>
+  </div>
+</div>
+
+<!-- STUDIOS -->
+<section class="studios-row">
+  <div class="studios-label">All studios</div>
+  <div class="studios-body">
+    <p class="s-text" style="max-width:600px;margin-bottom:0">We maintain studios across four continents, each with its own culture while sharing a common approach to design.</p>
+    <div class="studios-grid">
+      <div class="studio-item"><a href="#">London</a></div>
+      <div class="studio-item"><a href="#">Nairobi</a></div>
+      <div class="studio-item"><a href="#">Dubai</a></div>
+      <div class="studio-item"><a href="#">Singapore</a></div>
+      <div class="studio-item"><a href="#">New York</a></div>
+      <div class="studio-item"><a href="#">Lagos</a></div>
+      <div class="studio-item"><a href="#">Cape Town</a></div>
+      <div class="studio-item"><a href="#">Accra</a></div>
+      <div class="studio-item"><a href="#">Kigali</a></div>
+      <div class="studio-item"><a href="#">Mumbai</a></div>
+      <div class="studio-item"><a href="#">Tokyo</a></div>
+      <div class="studio-item"><a href="#">Sydney</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREERS -->
+<section class="careers-strip">
+  <div class="careers-label">Careers</div>
+  <div class="careers-text">
+    <h3>Join <em>Axiom</em></h3>
+    <p>We are a studio defined by the quality of its people. We recruit thoughtful, rigorous designers at every stage of their career — and we invest seriously in their development.</p>
+    <br>
+    <a href="#" class="p-link-w">View All Open Roles →</a>
+  </div>
+  <div class="careers-links">
+    <div class="careers-link-item">
+      <div>
+        <div class="careers-role">Senior Architect</div>
+        <div class="careers-loc">London · Full-time</div>
+      </div>
+      <span class="careers-arr">→</span>
+    </div>
+    <div class="careers-link-item">
+      <div>
+        <div class="careers-role">Landscape Architect</div>
+        <div class="careers-loc">Nairobi · Full-time</div>
+      </div>
+      <span class="careers-arr">→</span>
+    </div>
+    <div class="careers-link-item">
+      <div>
+        <div class="careers-role">Interior Designer</div>
+        <div class="careers-loc">Dubai · Full-time</div>
+      </div>
+      <span class="careers-arr">→</span>
+    </div>
+    <div class="careers-link-item">
+      <div>
+        <div class="careers-role">Structural Engineer</div>
+        <div class="careers-loc">Singapore · Full-time</div>
+      </div>
+      <span class="careers-arr">→</span>
+    </div>
+    <div class="careers-link-item">
+      <div>
+        <div class="careers-role">Urban Designer</div>
+        <div class="careers-loc">Lagos · Full-time</div>
+      </div>
+      <span class="careers-arr">→</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">
+    <div class="footer-wordmark">Axiom</div>
+    <div class="footer-tagline">Architecture, Engineering &amp; Design</div>
+    <div class="footer-socials">
+      <a href="#">Instagram</a><a href="#">LinkedIn</a><a href="#">Pinterest</a><a href="#">YouTube</a>
+    </div>
+  </div>
+  <div class="footer-nav">
+    <div class="footer-col"><h4>Pages</h4><ul>
+      <li><a href="index.html">Expertise</a></li><li><a href="process.html">Process</a></li>
+      <li><a href="projects.html">Projects</a></li><li><a href="contact.html">Contact</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Expertise</h4><ul>
+      <li><a href="#">Architecture</a></li><li><a href="#">Engineering</a></li>
+      <li><a href="#">Interiors</a></li><li><a href="#">Urban Design</a></li>
+      <li><a href="#">Sustainability</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul>
+      <li><a href="contact.html">Contact Us</a></li>
+      <li><a href="#">Press</a></li><li><a href="#">Careers</a></li>
+    </ul></div>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <div class="footer-bottom-l">Axiom Architecture</div>
+  <div class="footer-bottom-r"><span>© 2026 Axiom. All Rights Reserved.</span><a href="#">Privacy Policy</a></div>
+</div>
+
+<script>
+const obs = new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}}),{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+</script>
+</body>
+</html>

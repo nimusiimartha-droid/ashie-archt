@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Process — Axiom Architecture</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* PROCESS HERO — architectural drawing style */
+.proc-hero{
+  margin-top:54px;height:75vh;min-height:440px;
+  position:relative;overflow:hidden;background:#0e1014;
+  display:flex;align-items:flex-end;
+}
+.proc-hero svg{position:absolute;inset:0;width:100%;height:100%}
+.proc-hero-content{
+  position:relative;z-index:2;width:100%;
+  padding:3rem 2.5rem;
+  display:grid;grid-template-columns:200px 1fr;
+  border-top:1px solid rgba(255,255,255,0.07);
+}
+.proc-hero-label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);font-weight:400}
+.proc-hero-title{
+  font-family:var(--serif);
+  font-size:clamp(2.8rem,5vw,5rem);
+  font-weight:400;line-height:1.05;color:var(--white);
+}
+.proc-hero-title em{font-style:italic}
+
+/* INTRO STATEMENT — full width, big text */
+.proc-statement{
+  border-top:1px solid var(--border);
+  display:grid;grid-template-columns:200px 1fr;
+}
+.proc-statement-label{
+  padding:4rem 2.5rem;border-right:1px solid var(--border);
+  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);font-weight:400;
+}
+.proc-statement-text{
+  padding:4rem 3.5rem;
+}
+.proc-big-quote{
+  font-family:var(--serif);font-style:italic;
+  font-size:clamp(1.4rem,2.5vw,2rem);line-height:1.55;
+  color:var(--black);max-width:700px;margin-bottom:2rem;
+}
+.proc-big-quote strong{font-style:normal;font-weight:400}
+
+/* PHASE STEPS — accordion style list */
+.phases{border-top:1px solid var(--border);display:grid;grid-template-columns:200px 1fr}
+.phases-label{
+  padding:4rem 2.5rem;border-right:1px solid var(--border);
+  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);font-weight:400;
+}
+.phases-body{display:flex;flex-direction:column}
+.phase{
+  border-bottom:1px solid var(--border);
+  display:grid;grid-template-columns:80px 1fr auto;
+  gap:0;
+  cursor:pointer;
+  transition:background 0.2s;
+}
+.phase:hover{background:var(--off)}
+.phase-num{
+  padding:2.8rem 2rem;
+  font-family:var(--serif);font-size:1.6rem;color:var(--border);font-weight:400;
+  border-right:1px solid var(--border);line-height:1;
+  display:flex;align-items:flex-start;padding-top:2.8rem;
+}
+.phase-main{padding:2.8rem 3rem}
+.phase-name{
+  font-family:var(--serif);font-size:1.4rem;font-weight:400;
+  margin-bottom:0;line-height:1.2;
+  transition:color 0.2s;
+}
+.phase:hover .phase-name{color:var(--mid)}
+.phase-tagline{
+  font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--mid);margin-top:0.4rem;font-weight:400;
+}
+.phase-detail{
+  font-size:0.85rem;line-height:1.85;font-weight:300;color:#555;
+  max-width:560px;margin-top:1.5rem;
+  display:none;
+}
+.phase.open .phase-detail{display:block}
+.phase-icon{
+  padding:2.8rem 2.5rem;
+  display:flex;align-items:flex-start;
+  border-left:1px solid var(--border);
+}
+.phase-icon svg{
+  width:16px;height:16px;stroke:var(--mid);fill:none;stroke-width:1.5;
+  transition:transform 0.3s;
+}
+.phase.open .phase-icon svg{transform:rotate(45deg)}
+
+/* PRINCIPLES GRID */
+.principles{
+  border-top:1px solid var(--border);
+  display:grid;grid-template-columns:200px 1fr;
+}
+.principles-label{
+  padding:4rem 2.5rem;border-right:1px solid var(--border);
+  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);font-weight:400;
+}
+.principles-body{
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.principle{
+  padding:3.5rem 3rem;
+  border-right:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.principle:nth-child(2n){border-right:none}
+.principle:nth-child(3),.principle:nth-child(4){border-bottom:none}
+.principle-num{
+  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--border);margin-bottom:1.5rem;font-weight:400;
+}
+.principle-title{
+  font-family:var(--serif);font-size:1.3rem;font-weight:400;
+  margin-bottom:1rem;line-height:1.3;
+}
+.principle-title em{font-style:italic}
+.principle-text{font-size:0.82rem;line-height:1.85;font-weight:300;color:#555}
+
+/* CTA ROW */
+.proc-cta{
+  border-top:1px solid var(--border);
+  background:var(--black);
+  display:grid;grid-template-columns:200px 1fr;
+}
+.proc-cta-label{
+  padding:4rem 2.5rem;border-right:1px solid rgba(255,255,255,0.07);
+  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.25);font-weight:400;
+}
+.proc-cta-body{
+  padding:4rem 3.5rem;
+  display:flex;flex-direction:column;gap:2rem;
+}
+.proc-cta-body h2{
+  font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:400;
+  line-height:1.2;color:var(--white);
+}
+.proc-cta-body h2 em{font-style:italic}
+.proc-cta-body p{font-size:0.88rem;line-height:1.8;font-weight:300;color:rgba(255,255,255,0.5);max-width:480px}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Axiom</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Expertise</a></li>
+    <li><a href="process.html" class="active">Process</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-search">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L22 22"/></svg>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="proc-hero">
+  <svg viewBox="0 0 1440 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <rect width="1440" height="700" fill="#0c1016"/>
+    <!-- Architectural section drawing — showing building cut through -->
+    <!-- Ground line -->
+    <line x1="0" y1="580" x2="1440" y2="580" stroke="rgba(200,210,220,0.15)" stroke-width="1"/>
+    <!-- Main building section -->
+    <rect x="200" y="100" width="500" height="480" fill="#111820" stroke="rgba(200,210,220,0.12)" stroke-width="0.8"/>
+    <!-- Interior floor plates (cross section) -->
+    <line x1="200" y1="180" x2="700" y2="180" stroke="rgba(200,210,220,0.15)" stroke-width="1.5"/>
+    <line x1="200" y1="260" x2="700" y2="260" stroke="rgba(200,210,220,0.15)" stroke-width="1.5"/>
+    <line x1="200" y1="340" x2="700" y2="340" stroke="rgba(200,210,220,0.15)" stroke-width="1.5"/>
+    <line x1="200" y1="420" x2="700" y2="420" stroke="rgba(200,210,220,0.15)" stroke-width="1.5"/>
+    <line x1="200" y1="500" x2="700" y2="500" stroke="rgba(200,210,220,0.15)" stroke-width="1.5"/>
+    <!-- Structural columns in section -->
+    <rect x="220" y="100" width="12" height="480" fill="#1a2432"/>
+    <rect x="380" y="100" width="12" height="480" fill="#1a2432"/>
+    <rect x="540" y="100" width="12" height="480" fill="#1a2432"/>
+    <rect x="680" y="100" width="12" height="480" fill="#1a2432"/>
+    <!-- Interior spaces -->
+    <rect x="236" y="188" width="136" height="64" fill="rgba(200,220,255,0.05)"/>
+    <rect x="396" y="268" width="136" height="64" fill="rgba(255,220,160,0.07)"/>
+    <rect x="236" y="348" width="295" height="64" fill="rgba(200,220,255,0.05)"/>
+    <!-- Hatch pattern — ground floor solid -->
+    <line x1="200" y1="590" x2="220" y2="580" stroke="rgba(200,210,220,0.08)" stroke-width="0.5"/>
+    <line x1="215" y1="590" x2="235" y2="580" stroke="rgba(200,210,220,0.08)" stroke-width="0.5"/>
+    <line x1="230" y1="590" x2="250" y2="580" stroke="rgba(200,210,220,0.08)" stroke-width="0.5"/>
+    <line x1="245" y1="590" x2="265" y2="580" stroke="rgba(200,210,220,0.08)" stroke-width="0.5"/>
+    <!-- Dimension arrows -->
+    <line x1="200" y1="620" x2="700" y2="620" stroke="rgba(200,210,220,0.15)" stroke-width="0.8"/>
+    <line x1="200" y1="616" x2="200" y2="624" stroke="rgba(200,210,220,0.15)" stroke-width="0.8"/>
+    <line x1="700" y1="616" x2="700" y2="624" stroke="rgba(200,210,220,0.15)" stroke-width="0.8"/>
+    <text x="425" y="640" font-size="10" fill="rgba(200,210,220,0.25)" font-family="monospace" text-anchor="middle" letter-spacing="2">48 600</text>
+    <!-- Level annotations -->
+    <line x1="710" y1="180" x2="740" y2="180" stroke="rgba(200,210,220,0.12)" stroke-width="0.6"/>
+    <text x="748" y="184" font-size="9" fill="rgba(200,210,220,0.25)" font-family="monospace" letter-spacing="1">L4</text>
+    <line x1="710" y1="260" x2="740" y2="260" stroke="rgba(200,210,220,0.12)" stroke-width="0.6"/>
+    <text x="748" y="264" font-size="9" fill="rgba(200,210,220,0.25)" font-family="monospace" letter-spacing="1">L3</text>
+    <line x1="710" y1="340" x2="740" y2="340" stroke="rgba(200,210,220,0.12)" stroke-width="0.6"/>
+    <text x="748" y="344" font-size="9" fill="rgba(200,210,220,0.25)" font-family="monospace" letter-spacing="1">L2</text>
+    <line x1="710" y1="420" x2="740" y2="420" stroke="rgba(200,210,220,0.12)" stroke-width="0.6"/>
+    <text x="748" y="424" font-size="9" fill="rgba(200,210,220,0.25)" font-family="monospace" letter-spacing="1">L1</text>
+    <line x1="710" y1="580" x2="740" y2="580" stroke="rgba(200,210,220,0.12)" stroke-width="0.6"/>
+    <text x="748" y="584" font-size="9" fill="rgba(200,210,220,0.25)" font-family="monospace" letter-spacing="1">GL</text>
+    <!-- Right: secondary building -->
+    <rect x="820" y="280" width="360" height="300" fill="#111820" stroke="rgba(200,210,220,0.1)" stroke-width="0.7"/>
+    <line x1="820" y1="350" x2="1180" y2="350" stroke="rgba(200,210,220,0.1)" stroke-width="1"/>
+    <line x1="820" y1="430" x2="1180" y2="430" stroke="rgba(200,210,220,0.1)" stroke-width="1"/>
+    <line x1="820" y1="510" x2="1180" y2="510" stroke="rgba(200,210,220,0.1)" stroke-width="1"/>
+    <rect x="840" y="288" width="8" height="292" fill="#1a2432"/>
+    <rect x="960" y="288" width="8" height="292" fill="#1a2432"/>
+    <rect x="1080" y="288" width="8" height="292" fill="#1a2432"/>
+    <rect x="1162" y="288" width="8" height="292" fill="#1a2432"/>
+  </svg>
+  <div class="proc-hero-content">
+    <span class="proc-hero-label">Process</span>
+    <h1 class="proc-hero-title">How we<br><em>design</em></h1>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section class="proc-statement">
+  <div class="proc-statement-label">Our approach</div>
+  <div class="proc-statement-text">
+    <p class="proc-big-quote reveal">
+      We do not begin with a form. We begin with <strong>questions</strong> — about place, about people, about purpose. The architecture emerges from the rigour with which those questions are answered.
+    </p>
+    <p class="s-text reveal">Every project at Axiom moves through a defined sequence of phases, each with its own depth and integrity. We resist the temptation to rush toward a solution before we fully understand the problem.</p>
+    <p class="s-text reveal">This process has been refined across 60 years and 400 projects — on every continent, at every scale.</p>
+  </div>
+</section>
+
+<!-- PHASES -->
+<section class="phases">
+  <div class="phases-label">The phases</div>
+  <div class="phases-body">
+
+    <div class="phase open" onclick="togglePhase(this)">
+      <div class="phase-num">01</div>
+      <div class="phase-main">
+        <div class="phase-name">Listen &amp; Research</div>
+        <div class="phase-tagline">Understanding before answering</div>
+        <div class="phase-detail">
+          Every engagement begins with a sustained period of listening. We immerse ourselves in the client's world — understanding their operations, culture, aspirations and constraints. We survey the site extensively: its microclimate, its solar geometry, its acoustic landscape, its connection to the wider city or landscape. We study the precedents, the failures, the things that have been tried before. Only when we are genuinely saturated with understanding do we begin to draw.
+        </div>
+      </div>
+      <div class="phase-icon"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12"/></svg></div>
+    </div>
+
+    <div class="phase" onclick="togglePhase(this)">
+      <div class="phase-num">02</div>
+      <div class="phase-main">
+        <div class="phase-name">Concept</div>
+        <div class="phase-tagline">The essential gesture</div>
+        <div class="phase-detail">
+          The concept phase is about finding the one organising idea that can unify every subsequent decision. We test many directions, but we commit to one — developing it with enough depth to withstand scrutiny. A strong concept is not a style or a formal signature; it is a strategic response to the conditions of the project. It answers the question: why should this building look and work the way it does?
+        </div>
+      </div>
+      <div class="phase-icon"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12"/></svg></div>
+    </div>
+
+    <div class="phase" onclick="togglePhase(this)">
+      <div class="phase-num">03</div>
+      <div class="phase-main">
+        <div class="phase-name">Design Development</div>
+        <div class="phase-tagline">From idea to architecture</div>
+        <div class="phase-detail">
+          This is where the concept is tested against reality. We work across scales simultaneously — from the master plan to the door handle — because the quality of architecture depends on the coherence of decisions at every level. We integrate structural, environmental and mechanical engineering from the outset, not as a separate layer but as a co-author of form. Models are built, options are compared, and every decision is justified against the project's governing principles.
+        </div>
+      </div>
+      <div class="phase-icon"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12"/></svg></div>
+    </div>
+
+    <div class="phase" onclick="togglePhase(this)">
+      <div class="phase-num">04</div>
+      <div class="phase-main">
+        <div class="phase-name">Technical Design</div>
+        <div class="phase-tagline">Precision at every detail</div>
+        <div class="phase-detail">
+          Technical design is not a reduction of ambition — it is its proof. Every joint, every junction, every material interface is resolved with the same care as the overall form. We produce complete, coordinated drawing packages that leave nothing ambiguous. Our technical team works hand-in-glove with specialist contractors, manufacturers and material researchers to ensure that what is drawn can be built — and that what is built matches the intent exactly.
+        </div>
+      </div>
+      <div class="phase-icon"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12"/></svg></div>
+    </div>
+
+    <div class="phase" onclick="togglePhase(this)">
+      <div class="phase-num">05</div>
+      <div class="phase-main">
+        <div class="phase-name">Construction</div>
+        <div class="phase-tagline">Present on site, always</div>
+        <div class="phase-detail">
+          Architecture is made on site. We maintain full design authority through construction, with a dedicated team present at every stage. Decisions made in the field — the response to unexpected ground conditions, the resolution of a material substitution, the response to a changed programme — are made with the same quality of thought as those made in the studio. We do not disappear after planning approval.
+        </div>
+      </div>
+      <div class="phase-icon"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12"/></svg></div>
+    </div>
+
+    <div class="phase" onclick="togglePhase(this)">
+      <div class="phase-num">06</div>
+      <div class="phase-main">
+        <div class="phase-name">Post-Occupancy</div>
+        <div class="phase-tagline">Buildings are not finished — they are inhabited</div>
+        <div class="phase-detail">
+          We return to every completed project at six months and two years after occupation. We measure performance against predictions, we speak with the people who live and work in the building, and we carry what we learn forward into future work. This is not a contractual obligation — it is a professional and ethical one. We are responsible for what we build, long after the keys are handed over.
+        </div>
+      </div>
+      <div class="phase-icon"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12"/></svg></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRINCIPLES -->
+<section class="principles">
+  <div class="principles-label">Guiding principles</div>
+  <div class="principles-body">
+    <div class="principle reveal">
+      <div class="principle-num">— 01</div>
+      <div class="principle-title"><em>Integration</em> over addition</div>
+      <div class="principle-text">Structure, environment, programme and form must be conceived together from the outset. A building that treats engineering as a constraint to be managed will never be as good as one where structure and architecture are inseparable.</div>
+    </div>
+    <div class="principle reveal">
+      <div class="principle-num">— 02</div>
+      <div class="principle-title">Place as <em>the brief</em></div>
+      <div class="principle-text">The site is not a blank canvas. It carries climate, history, culture and urban grain. Architecture that ignores these forces will always feel foreign. Architecture that responds to them will always feel inevitable.</div>
+    </div>
+    <div class="principle reveal">
+      <div class="principle-num">— 03</div>
+      <div class="principle-title">Restraint as <em>rigour</em></div>
+      <div class="principle-text">We resist the accumulation of features, materials and gestures. Our work is defined by the precision of what is left out as much as by what is included. Complexity of thought should produce simplicity of form.</div>
+    </div>
+    <div class="principle reveal">
+      <div class="principle-num">— 04</div>
+      <div class="principle-title"><em>Longevity</em> by design</div>
+      <div class="principle-text">The most sustainable building is the one that is never demolished. We design for durability, adaptability and enduring relevance — so that the buildings we make are as useful in a hundred years as they are on opening day.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="proc-cta">
+  <div class="proc-cta-label">Next steps</div>
+  <div class="proc-cta-body">
+    <h2 class="reveal">Ready to start a<br><em>conversation?</em></h2>
+    <p class="reveal">Every project begins the same way — with a conversation. Tell us what you are trying to achieve, and we will tell you how we might help.</p>
+    <div style="display:flex;gap:2rem;flex-wrap:wrap">
+      <a href="contact.html" class="p-link-w">Get in Touch →</a>
+      <a href="projects.html" class="p-link-w">See Our Work →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">
+    <div class="footer-wordmark">Axiom</div>
+    <div class="footer-tagline">Architecture, Engineering &amp; Design</div>
+    <div class="footer-socials">
+      <a href="#">Instagram</a><a href="#">LinkedIn</a><a href="#">Pinterest</a><a href="#">YouTube</a>
+    </div>
+  </div>
+  <div class="footer-nav">
+    <div class="footer-col"><h4>Pages</h4><ul>
+      <li><a href="index.html">Expertise</a></li>
+      <li><a href="process.html">Process</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Expertise</h4><ul>
+      <li><a href="#">Architecture</a></li><li><a href="#">Engineering</a></li>
+      <li><a href="#">Interiors</a></li><li><a href="#">Urban Design</a></li>
+      <li><a href="#">Sustainability</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul>
+      <li><a href="contact.html">Contact Us</a></li>
+      <li><a href="#">Press</a></li><li><a href="#">Careers</a></li>
+    </ul></div>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <div class="footer-bottom-l">Axiom Architecture</div>
+  <div class="footer-bottom-r"><span>© 2026 Axiom. All Rights Reserved.</span><a href="#">Privacy Policy</a></div>
+</div>
+
+<script>
+function togglePhase(el){
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('open'));
+  if(!isOpen) el.classList.add('open');
+}
+const obs = new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}}),{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+</script>
+</body>
+</html>
