@@ -1,14 +1,75 @@
 [build]
   publish = "."
 
+# ── Security headers on every response ───────────────────────────
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "DENY"
+    X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# ── Long-lived cache for versioned assets ────────────────────────
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/shared.css"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# ── Clean URLs (strip .html) ──────────────────────────────────────
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/process.html"
+  to = "/process"
+  status = 301
+
+[[redirects]]
+  from = "/projects.html"
+  to = "/projects"
+  status = 301
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact"
+  status = 301
 
 [[redirects]]
   from = "/home"
   to = "/"
   status = 301
+
+# ── Serve HTML files for clean URL paths ─────────────────────────
+[[redirects]]
+  from = "/process"
+  to = "/process.html"
+  status = 200
+
+[[redirects]]
+  from = "/projects"
+  to = "/projects.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+# ── 404 fallback ─────────────────────────────────────────────────
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 404
