@@ -13,7 +13,6 @@
   position:relative;overflow:hidden;background:#0e1216;
   display:flex;align-items:flex-end;
 }
-.proj-hero svg{position:absolute;inset:0;width:100%;height:100%}
 .proj-hero-content{
   position:relative;z-index:2;width:100%;
   padding:3rem 2.5rem;
@@ -134,25 +133,10 @@
 
 <!-- HERO -->
 <section class="proj-hero">
-  <svg viewBox="0 0 1440 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-    <rect width="1440" height="600" fill="#0a0e14"/>
-    <!-- Abstract elevation — multiple buildings silhouette -->
-    <rect x="80" y="100" width="160" height="460" fill="#111a24" stroke="rgba(180,210,240,0.1)" stroke-width="0.6"/>
-    <rect x="100" y="50" width="120" height="60" fill="#0e1820" stroke="rgba(180,210,240,0.08)" stroke-width="0.5"/>
-    <rect x="260" y="200" width="280" height="360" fill="#101820" stroke="rgba(180,210,240,0.1)" stroke-width="0.6"/>
-    <rect x="280" y="130" width="240" height="80" fill="#0e1620" stroke="rgba(180,210,240,0.07)" stroke-width="0.5"/>
-    <rect x="560" y="80" width="200" height="480" fill="#12181e" stroke="rgba(180,210,240,0.12)" stroke-width="0.7"/>
-    <rect x="590" y="30" width="140" height="60" fill="#101620"/>
-    <rect x="780" y="180" width="220" height="380" fill="#111820" stroke="rgba(180,210,240,0.09)" stroke-width="0.6"/>
-    <rect x="1020" y="240" width="160" height="320" fill="#101620" stroke="rgba(180,210,240,0.08)" stroke-width="0.5"/>
-    <rect x="1200" y="160" width="200" height="400" fill="#12181e" stroke="rgba(180,210,240,0.1)" stroke-width="0.6"/>
-    <!-- Ground -->
-    <line x1="0" y1="560" x2="1440" y2="560" stroke="rgba(180,210,240,0.12)" stroke-width="0.7"/>
-    <rect x="0" y="560" width="1440" height="40" fill="#080c10"/>
-    <!-- Dim grid overlay -->
-    <line x1="0" y1="200" x2="1440" y2="200" stroke="rgba(180,210,240,0.02)" stroke-width="0.5"/>
-    <line x1="0" y1="400" x2="1440" y2="400" stroke="rgba(180,210,240,0.02)" stroke-width="0.5"/>
-  </svg>
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="images/ash vid.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
   <div class="proj-hero-content">
     <span class="proj-hero-label">Projects</span>
     <h1 class="proj-hero-title">Selected<br><em>work</em></h1>

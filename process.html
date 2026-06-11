@@ -13,7 +13,6 @@
   position:relative;overflow:hidden;background:#0e1014;
   display:flex;align-items:flex-end;
 }
-.proc-hero svg{position:absolute;inset:0;width:100%;height:100%}
 .proc-hero-content{
   position:relative;z-index:2;width:100%;
   padding:3rem 2.5rem;
@@ -192,59 +191,10 @@
 
 <!-- HERO -->
 <section class="proc-hero">
-  <svg viewBox="0 0 1440 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-    <rect width="1440" height="700" fill="#0c1016"/>
-    <!-- Architectural section drawing — showing building cut through -->
-    <!-- Ground line -->
-    <line x1="0" y1="580" x2="1440" y2="580" stroke="rgba(200,210,220,0.15)" stroke-width="1"/>
-    <!-- Main building section -->
-    <rect x="200" y="100" width="500" height="480" fill="#111820" stroke="rgba(200,210,220,0.12)" stroke-width="0.8"/>
-    <!-- Interior floor plates (cross section) -->
-    <line x1="200" y1="180" x2="700" y2="180" stroke="rgba(200,210,220,0.15)" stroke-width="1.5"/>
-    <line x1="200" y1="260" x2="700" y2="260" stroke="rgba(200,210,220,0.15)" stroke-width="1.5"/>
-    <line x1="200" y1="340" x2="700" y2="340" stroke="rgba(200,210,220,0.15)" stroke-width="1.5"/>
-    <line x1="200" y1="420" x2="700" y2="420" stroke="rgba(200,210,220,0.15)" stroke-width="1.5"/>
-    <line x1="200" y1="500" x2="700" y2="500" stroke="rgba(200,210,220,0.15)" stroke-width="1.5"/>
-    <!-- Structural columns in section -->
-    <rect x="220" y="100" width="12" height="480" fill="#1a2432"/>
-    <rect x="380" y="100" width="12" height="480" fill="#1a2432"/>
-    <rect x="540" y="100" width="12" height="480" fill="#1a2432"/>
-    <rect x="680" y="100" width="12" height="480" fill="#1a2432"/>
-    <!-- Interior spaces -->
-    <rect x="236" y="188" width="136" height="64" fill="rgba(200,220,255,0.05)"/>
-    <rect x="396" y="268" width="136" height="64" fill="rgba(255,220,160,0.07)"/>
-    <rect x="236" y="348" width="295" height="64" fill="rgba(200,220,255,0.05)"/>
-    <!-- Hatch pattern — ground floor solid -->
-    <line x1="200" y1="590" x2="220" y2="580" stroke="rgba(200,210,220,0.08)" stroke-width="0.5"/>
-    <line x1="215" y1="590" x2="235" y2="580" stroke="rgba(200,210,220,0.08)" stroke-width="0.5"/>
-    <line x1="230" y1="590" x2="250" y2="580" stroke="rgba(200,210,220,0.08)" stroke-width="0.5"/>
-    <line x1="245" y1="590" x2="265" y2="580" stroke="rgba(200,210,220,0.08)" stroke-width="0.5"/>
-    <!-- Dimension arrows -->
-    <line x1="200" y1="620" x2="700" y2="620" stroke="rgba(200,210,220,0.15)" stroke-width="0.8"/>
-    <line x1="200" y1="616" x2="200" y2="624" stroke="rgba(200,210,220,0.15)" stroke-width="0.8"/>
-    <line x1="700" y1="616" x2="700" y2="624" stroke="rgba(200,210,220,0.15)" stroke-width="0.8"/>
-    <text x="425" y="640" font-size="10" fill="rgba(200,210,220,0.25)" font-family="monospace" text-anchor="middle" letter-spacing="2">48 600</text>
-    <!-- Level annotations -->
-    <line x1="710" y1="180" x2="740" y2="180" stroke="rgba(200,210,220,0.12)" stroke-width="0.6"/>
-    <text x="748" y="184" font-size="9" fill="rgba(200,210,220,0.25)" font-family="monospace" letter-spacing="1">L4</text>
-    <line x1="710" y1="260" x2="740" y2="260" stroke="rgba(200,210,220,0.12)" stroke-width="0.6"/>
-    <text x="748" y="264" font-size="9" fill="rgba(200,210,220,0.25)" font-family="monospace" letter-spacing="1">L3</text>
-    <line x1="710" y1="340" x2="740" y2="340" stroke="rgba(200,210,220,0.12)" stroke-width="0.6"/>
-    <text x="748" y="344" font-size="9" fill="rgba(200,210,220,0.25)" font-family="monospace" letter-spacing="1">L2</text>
-    <line x1="710" y1="420" x2="740" y2="420" stroke="rgba(200,210,220,0.12)" stroke-width="0.6"/>
-    <text x="748" y="424" font-size="9" fill="rgba(200,210,220,0.25)" font-family="monospace" letter-spacing="1">L1</text>
-    <line x1="710" y1="580" x2="740" y2="580" stroke="rgba(200,210,220,0.12)" stroke-width="0.6"/>
-    <text x="748" y="584" font-size="9" fill="rgba(200,210,220,0.25)" font-family="monospace" letter-spacing="1">GL</text>
-    <!-- Right: secondary building -->
-    <rect x="820" y="280" width="360" height="300" fill="#111820" stroke="rgba(200,210,220,0.1)" stroke-width="0.7"/>
-    <line x1="820" y1="350" x2="1180" y2="350" stroke="rgba(200,210,220,0.1)" stroke-width="1"/>
-    <line x1="820" y1="430" x2="1180" y2="430" stroke="rgba(200,210,220,0.1)" stroke-width="1"/>
-    <line x1="820" y1="510" x2="1180" y2="510" stroke="rgba(200,210,220,0.1)" stroke-width="1"/>
-    <rect x="840" y="288" width="8" height="292" fill="#1a2432"/>
-    <rect x="960" y="288" width="8" height="292" fill="#1a2432"/>
-    <rect x="1080" y="288" width="8" height="292" fill="#1a2432"/>
-    <rect x="1162" y="288" width="8" height="292" fill="#1a2432"/>
-  </svg>
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="images/ash vid.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
   <div class="proc-hero-content">
     <span class="proc-hero-label">Process</span>
     <h1 class="proc-hero-title">How we<br><em>design</em></h1>
