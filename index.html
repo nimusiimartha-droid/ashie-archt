@@ -168,7 +168,31 @@
   <div class="nav-search">
     <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L22 22"/></svg>
   </div>
+  <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="nav-mobile" id="navMobile">
+  <div class="nav-mobile-head">
+    <span class="nav-mobile-brand">Ash Management<br>Services (u) Ltd</span>
+    <button class="nav-mobile-close" onclick="toggleMobileMenu()" aria-label="Close menu">
+      <svg viewBox="0 0 20 20"><line x1="2" y1="2" x2="18" y2="18"/><line x1="18" y1="2" x2="2" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="nav-mobile-links">
+    <a href="index.html" class="active">Expertise</a>
+    <a href="process.html">Process</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="nav-mobile-foot">
+    <a href="#">Instagram</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">Pinterest</a>
+    <a href="#">YouTube</a>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -602,6 +626,11 @@
 <script>
 const obs = new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}}),{threshold:0.15});
 document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+function toggleMobileMenu(){
+  const m=document.getElementById('navMobile');
+  m.classList.toggle('open');
+  document.body.style.overflow=m.classList.contains('open')?'hidden':'';
+}
 </script>
 </body>
 </html>
