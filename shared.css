@@ -53,12 +53,15 @@ nav {
 }
 
 .nav-logo {
-  font-family: var(--serif);
-  font-size: 1.1rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  color: var(--black);
+  display: flex;
+  align-items: center;
   flex-shrink: 0;
+}
+
+.nav-logo img {
+  height: 38px;
+  width: auto;
+  display: block;
 }
 
 .nav-links {
@@ -189,12 +192,11 @@ footer {
   flex-direction: column;
 }
 
-.footer-wordmark {
-  font-family: var(--serif);
-  font-size: 1.9rem;
-  font-weight: 400;
-  color: var(--black);
-  margin-bottom: 0.3rem;
+.footer-wordmark img {
+  height: 72px;
+  width: auto;
+  display: block;
+  margin-bottom: 0.2rem;
 }
 
 .footer-tagline {
