@@ -123,64 +123,32 @@
 .form-submit svg{width:16px;height:8px;stroke:currentColor;fill:none;stroke-width:1.2}
 .form-note{font-size:0.68rem;color:var(--mid);font-weight:300;max-width:220px;line-height:1.6}
 
-/* STUDIOS MAP ROW */
-.studios-row{
+/* CONTACT SOCIAL LINKS */
+.contact-socials{
+  display:flex;flex-wrap:wrap;gap:1.2rem;margin-top:0.8rem;
+}
+.contact-socials a{
+  font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--mid);font-weight:400;transition:color 0.2s;
+  border-bottom:1px solid transparent;padding-bottom:1px;
+}
+.contact-socials a:hover{color:var(--black);border-color:var(--black)}
+
+/* MAP SECTION */
+.map-row{
   border-top:1px solid var(--border);
   display:grid;grid-template-columns:200px 1fr;
 }
-.studios-label{
+.map-label{
   padding:3rem 2.5rem;border-right:1px solid var(--border);
   font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);font-weight:400;
 }
-.studios-body{padding:3rem 3rem}
-.studios-grid{
-  display:grid;grid-template-columns:repeat(6,1fr);gap:0;
-  border-top:1px solid var(--border);margin-top:1.5rem;
+.map-embed{
+  height:420px;overflow:hidden;
 }
-.studio-item{
-  padding:1rem 0;
-  border-bottom:1px solid var(--border);
-  border-right:1px solid var(--border);
+.map-embed iframe{
+  width:100%;height:100%;border:0;display:block;filter:grayscale(0.3) contrast(1.05);
 }
-.studio-item:nth-child(6n){border-right:none}
-.studio-item a{
-  font-size:0.75rem;font-weight:300;color:var(--mid);
-  text-decoration:none;transition:color 0.2s;
-}
-.studio-item a:hover{color:var(--black)}
-
-/* Careers strip */
-.careers-strip{
-  border-top:1px solid var(--border);
-  background:var(--black);
-  display:grid;grid-template-columns:200px 1fr 1fr;
-}
-.careers-label{
-  padding:3rem 2.5rem;border-right:1px solid rgba(255,255,255,0.07);
-  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.25);font-weight:400;
-}
-.careers-text{
-  padding:3rem 3.5rem;border-right:1px solid rgba(255,255,255,0.07);
-}
-.careers-text h3{font-family:var(--serif);font-size:1.5rem;font-weight:400;color:var(--white);margin-bottom:0.8rem}
-.careers-text h3 em{font-style:italic}
-.careers-text p{font-size:0.82rem;line-height:1.8;font-weight:300;color:rgba(255,255,255,0.45);max-width:360px}
-.careers-links{
-  padding:3rem 3rem;
-  display:flex;flex-direction:column;gap:0;
-  justify-content:center;
-  border-top:none;
-}
-.careers-link-item{
-  padding:0.9rem 0;border-bottom:1px solid rgba(255,255,255,0.07);
-  display:flex;justify-content:space-between;align-items:center;
-  cursor:pointer;transition:opacity 0.2s;
-}
-.careers-link-item:first-child{border-top:1px solid rgba(255,255,255,0.07)}
-.careers-link-item:hover{opacity:0.6}
-.careers-role{font-size:0.82rem;font-weight:300;color:var(--white)}
-.careers-loc{font-size:0.65rem;letter-spacing:0.1em;color:rgba(255,255,255,0.3);text-transform:uppercase}
-.careers-arr{font-size:0.7rem;color:rgba(255,255,255,0.3)}
 </style>
 </head>
 <body>
@@ -253,40 +221,35 @@
     <div class="offices-divider"></div>
 
     <div class="office-block reveal">
-      <div class="office-city">London — HQ</div>
-      <div class="office-line">22 Buckingham Gate</div>
-      <div class="office-line">London, SW1E 6LB</div>
-      <div class="office-line">United Kingdom</div>
-      <a href="mailto:london@axiom-arch.com" class="office-email">london@axiom-arch.com →</a>
+      <div class="office-city">Kampala, Uganda</div>
+      <div class="office-line">Makerere Kikoni</div>
+      <div class="office-line">Kampala, Uganda</div>
     </div>
 
     <div class="offices-divider"></div>
 
     <div class="office-block reveal">
-      <div class="office-city">Nairobi</div>
-      <div class="office-line">The Promenade, Upper Hill</div>
-      <div class="office-line">Nairobi, 00100</div>
-      <div class="office-line">Kenya</div>
-      <a href="mailto:nairobi@axiom-arch.com" class="office-email">nairobi@axiom-arch.com →</a>
+      <div class="office-city" style="font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);font-family:var(--sans);font-weight:400;margin-bottom:0.6rem">Phone</div>
+      <a href="tel:+256700000000" class="office-email">+256 700 000 000</a>
     </div>
 
     <div class="offices-divider"></div>
 
     <div class="office-block reveal">
-      <div class="office-city">Dubai</div>
-      <div class="office-line">Gate Building, DIFC</div>
-      <div class="office-line">Dubai</div>
-      <div class="office-line">United Arab Emirates</div>
-      <a href="mailto:dubai@axiom-arch.com" class="office-email">dubai@axiom-arch.com →</a>
+      <div class="office-city" style="font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);font-family:var(--sans);font-weight:400;margin-bottom:0.6rem">Email</div>
+      <a href="mailto:info@ashmanagementservices.ug" class="office-email">info@ashmanagementservices.ug →</a>
     </div>
 
     <div class="offices-divider"></div>
 
     <div class="office-block reveal">
-      <div class="office-city">Singapore</div>
-      <div class="office-line">1 Raffles Quay, North Tower</div>
-      <div class="office-line">Singapore, 048583</div>
-      <a href="mailto:singapore@axiom-arch.com" class="office-email">singapore@axiom-arch.com →</a>
+      <div class="office-city" style="font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);font-family:var(--sans);font-weight:400;margin-bottom:0.2rem">Follow Us</div>
+      <div class="contact-socials">
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Pinterest</a>
+        <a href="#">YouTube</a>
+      </div>
     </div>
   </div>
 
@@ -337,80 +300,24 @@
   </div>
 </div>
 
-<!-- STUDIOS -->
-<section class="studios-row">
-  <div class="studios-label">All studios</div>
-  <div class="studios-body">
-    <p class="s-text" style="max-width:600px;margin-bottom:0">We maintain studios across four continents, each with its own culture while sharing a common approach to design.</p>
-    <div class="studios-grid">
-      <div class="studio-item"><a href="#">London</a></div>
-      <div class="studio-item"><a href="#">Nairobi</a></div>
-      <div class="studio-item"><a href="#">Dubai</a></div>
-      <div class="studio-item"><a href="#">Singapore</a></div>
-      <div class="studio-item"><a href="#">New York</a></div>
-      <div class="studio-item"><a href="#">Lagos</a></div>
-      <div class="studio-item"><a href="#">Cape Town</a></div>
-      <div class="studio-item"><a href="#">Accra</a></div>
-      <div class="studio-item"><a href="#">Kigali</a></div>
-      <div class="studio-item"><a href="#">Mumbai</a></div>
-      <div class="studio-item"><a href="#">Tokyo</a></div>
-      <div class="studio-item"><a href="#">Sydney</a></div>
-    </div>
-  </div>
-</section>
-
-<!-- CAREERS -->
-<section class="careers-strip">
-  <div class="careers-label">Careers</div>
-  <div class="careers-text">
-    <h3>Join <em>Ash Management Services</em></h3>
-    <p>We are a studio defined by the quality of its people. We recruit thoughtful, rigorous designers at every stage of their career — and we invest seriously in their development.</p>
-    <br>
-    <a href="#" class="p-link-w">View All Open Roles →</a>
-  </div>
-  <div class="careers-links">
-    <div class="careers-link-item">
-      <div>
-        <div class="careers-role">Senior Architect</div>
-        <div class="careers-loc">London · Full-time</div>
-      </div>
-      <span class="careers-arr">→</span>
-    </div>
-    <div class="careers-link-item">
-      <div>
-        <div class="careers-role">Landscape Architect</div>
-        <div class="careers-loc">Nairobi · Full-time</div>
-      </div>
-      <span class="careers-arr">→</span>
-    </div>
-    <div class="careers-link-item">
-      <div>
-        <div class="careers-role">Interior Designer</div>
-        <div class="careers-loc">Dubai · Full-time</div>
-      </div>
-      <span class="careers-arr">→</span>
-    </div>
-    <div class="careers-link-item">
-      <div>
-        <div class="careers-role">Structural Engineer</div>
-        <div class="careers-loc">Singapore · Full-time</div>
-      </div>
-      <span class="careers-arr">→</span>
-    </div>
-    <div class="careers-link-item">
-      <div>
-        <div class="careers-role">Urban Designer</div>
-        <div class="careers-loc">Lagos · Full-time</div>
-      </div>
-      <span class="careers-arr">→</span>
-    </div>
+<!-- MAP -->
+<section class="map-row">
+  <div class="map-label">Find us</div>
+  <div class="map-embed">
+    <iframe
+      src="https://maps.google.com/maps?q=Makerere+Kikoni+Kampala+Uganda&t=&z=15&ie=UTF8&iwloc=&output=embed"
+      allowfullscreen
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Ash Management Services — Makerere Kikoni, Kampala">
+    </iframe>
   </div>
 </section>
 
 <footer>
   <div class="footer-brand">
-    <div class="footer-wordmark"><img src="images/logo ash.png" alt="Ash Management Services (u) Ltd"></div>
-    <div class="footer-tagline">Ash Management Services (u) Ltd</div>
+    <div class="footer-wordmark"><img src="images/logo ash.png" alt="Ash Management Services (u) Ltd" style="mix-blend-mode:multiply"></div>
+    <div class="footer-tagline">Architecture · Engineering · Design</div>
     <div class="footer-socials">
       <a href="#">Instagram</a><a href="#">LinkedIn</a><a href="#">Pinterest</a><a href="#">YouTube</a>
     </div>
@@ -431,8 +338,9 @@
     </ul></div>
     <div class="footer-col"><h4>Connect</h4><ul>
       <li><a href="contact.html">Contact Us</a></li>
-      <li><a href="#">Press</a></li>
-      <li><a href="#">Careers</a></li>
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">LinkedIn</a></li>
+      <li><a href="#">YouTube</a></li>
     </ul></div>
   </div>
 </footer>
